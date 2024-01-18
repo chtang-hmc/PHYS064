@@ -13,9 +13,18 @@ def pi2by6(accuracy):
 #   value is an approximation to pi square over six.
 #   N is the number of terms used in the sum formula.
 
+    def calculate_term(i):
+        return 1/((i+1)**2)
+
+        terms = np.fromfunction(calculate_term, (accuracy,), dtype=np.float64)
+                                
+        sum = np.sum(terms)
+        
+        return sum, accuracy
+
 
 def energy(terms, b):
-
+    
 # Inputs:
 #
 # terms: a positive non-zero number determining the desired precision 
@@ -29,4 +38,14 @@ def energy(terms, b):
 # Notice how we have ensured that the two arguments and output are all 
 # dimensionless quantities, measured in the appropriate scales in the problem.
 
-  
+    def calculate_Z(n):
+        return np.exp(-b*(n+0.5))
+    terms_Z = np.fromfunction(calculate_Z, (terms,), dtype=np.float64)
+    Z = np.sum(terms_Z)
+    
+    def calculate_E_n(n):
+        return (n+0.5)*terms_Z[n]
+    
+    E_average = np.sum(np.fromfunction(calculate_E_n, (terms,), dtype=np.float64))/Z
+    
+    return E_average
