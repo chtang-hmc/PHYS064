@@ -16,12 +16,11 @@ def pi2by6(accuracy):
     def calculate_term(i):
         return 1/((i+1)**2)
 
-        terms = np.fromfunction(calculate_term, (accuracy,), dtype=np.float64)
+    terms = np.fromfunction(calculate_term, (accuracy,), dtype=np.float64)
                                 
-        sum = np.sum(terms)
+    sum_terms = np.sum(terms)
         
-        return sum, accuracy
-
+    return sum_terms, accuracy
 
 def energy(terms, b):
     
