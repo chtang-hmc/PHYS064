@@ -1,8 +1,4 @@
-import numpy as np
-import scipy as sp
-
-def pi2by6(accuracy):
-
+function pi2by6(accuracy)
 # Inputs:
 #
 # accuracy: A number between 0 and 1 denoting the percent error in the result.
@@ -13,17 +9,15 @@ def pi2by6(accuracy):
 #   value is an approximation to pi square over six.
 #   N is the number of terms used in the sum formula.
 
-    def calculate_term(i):
-        return 1/((i+1)**2)
+    sum_terms = 0
+    for i = 1:accuracy
+        sum_terms += 1/(i^2)
+    end
+    println(sqrt(sum_terms*6))
+    return (sum_terms, accuracy)
+end
 
-    terms = np.fromfunction(calculate_term, (accuracy,), dtype=np.float64)
-                                
-    sum_terms = np.sum(terms)
-        
-    return sum_terms, accuracy
-
-def energy(terms, b):
-    
+function energy(terms, b)
 # Inputs:
 #
 # terms: a positive non-zero number determining the desired precision 
@@ -36,15 +30,18 @@ def energy(terms, b):
 #
 # Notice how we have ensured that the two arguments and output are all 
 # dimensionless quantities, measured in the appropriate scales in the problem.
+    Z = 0
+    for i = 0:terms
+        Z += exp(-b*(i+0.5))
+    end
 
-    def calculate_Z(n):
-        return np.exp(-b*(n+0.5))
-    terms_Z = np.fromfunction(calculate_Z, (terms,), dtype=np.float64)
-    Z = np.sum(terms_Z)
-    
-    def calculate_E_n(n):
-        return (n+0.5)*terms_Z[n]
-    
-    E_average = np.sum(np.fromfunction(calculate_E_n, (terms,), dtype=np.float64))/Z
-    
-    return E_average
+    E_average = 0
+    for i = 0:terms
+        E_average += (i+0.5)*exp(-b*(i+0.5))
+    end
+
+    return E_average/Z
+end
+
+pi2by6(100000000)
+energy(100000000, 1)
