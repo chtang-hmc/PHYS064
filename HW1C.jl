@@ -1,3 +1,4 @@
+# Problem 2
 function pi2by6(accuracy)
 # Inputs:
 #
@@ -17,6 +18,7 @@ function pi2by6(accuracy)
     return (sum_terms, accuracy)
 end
 
+# Problem 4
 function energy(terms, b)
 # Inputs:
 #
