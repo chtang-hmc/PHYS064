@@ -14,7 +14,6 @@ function pi2by6(accuracy)
     for i = 1:accuracy
         sum_terms += 1/(i^2)
     end
-    println(sqrt(sum_terms*6))
     return (sum_terms, accuracy)
 end
 
@@ -44,6 +43,3 @@ function energy(terms, b)
 
     return E_average/Z
 end
-
-pi2by6(100000000)
-energy(100000000, 1)
