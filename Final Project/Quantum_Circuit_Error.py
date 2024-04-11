@@ -65,3 +65,19 @@ class QC(QuantumCircuit):
         sv = np.round(get_state(self), 3)
         states_dict = dict(zip(states, sv))
         return states_dict
+    
+    def steane_encode(self, q):
+        '''
+        Steane error correction encoding
+        '''
+        
+        pass
+    
+    def steane_decode(self, q):
+        '''
+        Steane error correction decoding
+        '''
+        
+        pass
+    
+    
