@@ -66,18 +66,22 @@ class QC(QuantumCircuit):
         states_dict = dict(zip(states, sv))
         return states_dict
     
-    def steane_encode(self, q):
+    def fidelity(self, state):
         '''
-        Steane error correction encoding
+        Calculate the fidelity of the quantum circuit with respect to a given state
+        '''
+        # get the statevector of the quantum circuit
+        psi = get_state(self)
+        # calculate the fidelity
+        fidelity = np.abs(np.dot(np.conj(state), psi))**2
+        return fidelity
+    
+    def decoherence(self, T1, T2, gate_time):
+        '''
+        Apply decoherence to the quantum circuit
         '''
         
         pass
     
-    def steane_decode(self, q):
-        '''
-        Steane error correction decoding
-        '''
-        
-        pass
-    
+
     
